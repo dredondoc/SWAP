@@ -22,19 +22,34 @@ El primer paso para poder conectar ambas máquinas es conocer la IP mediante
 ### IP de la segunda máquina
 ![ip2](./img/ip2.png)
 
+En los siguientes pasos, las máquinas quedarán identificadas por su dirección IP.
+
 -----
-## Acceso por SSH
+## Acceso mediante SSH
 
 Para acceder a una máquina por SSH esta debe estar operativa y conocer su dirección IP y credenciales de acceso. La conexión se realiza mediante `ssh <user>@<ip>`
 
-### Primera máquina conectando a la segunda
+### Primera máquina conectada a la segunda
 `ssh ubuserver@172.16.164.128`
 
 ![ssh1](./img/ssh1to2.png)
 
-### Segunda máquina conectando a la primera
+### Segunda máquina conectada a la primera
 `ssh ubuserver@172.16.164.129`
 
 ![ssh2](./img/ssh2to1.png)
 
-## 
+----
+## Acceso mediante CURL
+
+En este caso se procederá a descargar un archivo HTML del servidor web desplegado en la máquina. Para ello se empleará `curl http://<ip>/hola.html`
+
+### Primera máquina conectando a la segunda
+`curl http://172.16.164.128/hola.html`
+
+![ssh1](./img/curl1to2.png)
+
+### Segunda máquina conectando a la primera
+`curl http://172.16.164.129/hola.html`
+
+![ssh2](./img/curl2to1.png)
