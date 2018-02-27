@@ -13,7 +13,13 @@ Hay que llevar a cabo las siguientes tareas:*
 
 ## Copia de archivos por SSH
 
-La solución que se mostrará a continuación es útil para la copia de algún archivo puntual o para crear directamente un archivo en nuestro servidor a través de ssh. 
+La solución que se mostrará a continuación es útil para la copia de algún archivo puntual o para crear directamente un archivo en nuestro servidor a través de ssh. En este caso se comprimirá la carpeta actual (home) en la máquina 1 y será enviada a la máquina 2 
+
+**Maquina 1**
+![ssh1](./img/copia1.png)
+
+**Maquina 2**
+![ssh1](./img/copia2.png)
 
 
 El método descrito no es el más recomendado, es preferible emplear rsync.
@@ -24,10 +30,10 @@ El método descrito no es el más recomendado, es preferible emplear rsync.
 El primer paso, previo a la copia, es establecer como dueño del directorio web al usuario sin privilegios (en mi caso 'ubuserver') en ambas máquinas: `sudo chown ubuserver:ubuserver –R /var/www`
 
 Para comprobar el funcionamiento de rsync borraré el contenido de un directorio de la máquina 2 y lo clonaré de la máquina 1. Para realizarlo se debe emplear el siguiente comando `rsync -avz -e ssh user@ip:/dir/original /dir/clonado/` donde:
-* **a** :arrow_forward: modo archivos.
-* **v** :arrow_forward: verbose, información extra.
-* **z** :arrow_forward: comprime el archivo para su envío.
-* **e** :arrow_forward: especifica la shell remota
+* **a**  modo archivos.
+* **v**  verbose, información extra.
+* **z**  comprime el archivo para su envío.
+* **e**  especifica la shell remota
 
 En mi caso debo emplear el siguiente comando:
 `rsync -avz -e ssh ubuserver@172.16.164.129:/var/www/ /var/www/`
