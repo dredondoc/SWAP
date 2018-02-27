@@ -16,9 +16,11 @@ Hay que llevar a cabo las siguientes tareas:*
 La solución que se mostrará a continuación es útil para la copia de algún archivo puntual o para crear directamente un archivo en nuestro servidor a través de ssh. En este caso se comprimirá la carpeta actual (home) en la máquina 1 y será enviada a la máquina 2 
 
 **Maquina 1**
+
 ![ssh1](./img/copia1.png)
 
 **Maquina 2**
+
 ![ssh1](./img/copia2.png)
 
 
