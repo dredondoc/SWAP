@@ -29,10 +29,12 @@ Para acceder a una máquina por SSH esta debe estar operativa y conocer su direc
 
 ### Primera máquina conectando a la segunda
 `ssh ubuserver@172.16.164.128`
+
 ![ssh1](./img/ssh1to2.png)
 
 ### Segunda máquina conectando a la primera
 `ssh ubuserver@172.16.164.129`
+
 ![ssh2](./img/ssh2to1.png)
 
 ## 
