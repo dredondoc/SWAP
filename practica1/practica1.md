@@ -21,3 +21,18 @@ El primer paso para poder conectar ambas máquinas es conocer la IP mediante
 ![ip1](./img/ip1.png)
 ### IP de la segunda máquina
 ![ip2](./img/ip2.png)
+
+-----
+## Acceso por SSH
+
+Para acceder a una máquina por SSH esta debe estar operativa y conocer su dirección IP y credenciales de acceso. La conexión se realiza mediante `ssh <user>@<ip>`
+
+### Primera máquina conectando a la segunda
+`ssh ubuserver@172.16.164.128`
+![ssh1](./img/ssh1to2.png)
+
+### Segunda máquina conectando a la primera
+`ssh ubuserver@172.16.164.129`
+![ssh2](./img/ssh2to1.png)
+
+## 
