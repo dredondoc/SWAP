@@ -1,4 +1,4 @@
-# Practica 1: Preparación de las herramientas
+# Práctica 1: Preparación de las herramientas
 
  
 *En esta práctica el objetivo es configurar las máquinas virtuales para trabajar en
@@ -53,3 +53,6 @@ En este caso se procederá a descargar un archivo HTML del servidor web desplega
 `curl http://172.16.164.129/hola.html`
 
 ![ssh2](./img/curl2to1.png)
+
+-----
+[Práctica 2](../practica2/practica2.md)
