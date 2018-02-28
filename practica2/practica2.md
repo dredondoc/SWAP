@@ -31,7 +31,7 @@ El método descrito no es el más recomendado, es preferible emplear rsync.
 
 El primer paso, previo a la copia, es establecer como dueño del directorio web al usuario sin privilegios (en mi caso 'ubuserver') en ambas máquinas: `sudo chown ubuserver:ubuserver –R /var/www`
 
-Para comprobar el funcionamiento de rsync borraré el contenido de un directorio de la máquina 2 y lo clonaré de la máquina 1. Para realizarlo se debe emplear el siguiente comando `rsync -avz -e ssh user@ip:/dir/original /dir/clonado/` donde:
+Para comprobar el funcionamiento de rsync borraré el contenido de un directorio de la máquina 2 y lo clonaré de la máquina 1. Para realizarlo se debe emplear el siguiente comando `rsync -avz -e ssh user@ip:/dir/destino/ /dir/original/` donde:
 * **a**  modo archivos.
 * **v**  verbose, información extra.
 * **z**  comprime el archivo para su envío.
