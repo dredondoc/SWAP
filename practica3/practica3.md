@@ -4,9 +4,11 @@
 hagan de servidores web finales mientras que la tercera haga de balanceador de
 carga por software.*
 *En esta práctica se llevarán a cabo, como mínimo, las siguientes tareas:*
-1. *configurar una máquina e instalar el nginx como balanceador de carga2. configurar una máquina e instalar el haproxy como balanceador de carga*
-2. *someter a la granja web a una alta carga, generada con la herramienta Apache
-Benchmark, teniendo primero nginx y después haproxy.*
+1. *configurar una máquina e instalar el nginx como balanceador de carga*
+2. *configurar una máquina e instalar el haproxy como balanceador de carga*
+3. *someter a la granja web a una alta carga, generada con la herramienta Apache Benchmark, teniendo primero nginx y después haproxy.*
+
+
 *En las tareas 1 y 2 debemos hacer peticiones a la dirección IP del balanceador y
 comprobar que realmente se reparte la carga. Para ello, el index.html en las
 máquinas finales deben ser diferentes para ver cómo las respuestas que recibimos al
