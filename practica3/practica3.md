@@ -22,13 +22,12 @@ En la tarea 3 debemos usar la herramienta ab para someter a una carga muy alta
 nginx como balanceador, y a continuación estando haproxy como balanceador. Como
 resultado, se debe realizar una comparación de los tiempos medios de servicio entre
 ambos balanceadores, para poder determinar cuál funciona mejor.
-Adicionalmente, y como tarea opcional para conseguir una mayor nota en esta
-práctica, se propone el uso de algún otro software de balanceo diferente a los dos
+Adicionalmente, y como tarea opcional para conseguir una mayor nota en esta práctica, se propone el uso de algún otro software de balanceo diferente a los dos
 explicados en este guión (por ejemplo Pound).*
 
 ----
 
-**Nota: ** Debido a la reinstalación del sistema host y posterior instalación de las máquinas virtuales en virtualbox (anteriormente estaban en VMware), las configuraciones de estas VMs han cambiado. A partir de este momento las IPs serán:
+**Nota** Debido a la reinstalación del sistema host y posterior instalación de las máquinas virtuales en virtualbox (anteriormente estaban en VMware), las configuraciones de estas VMs han cambiado. A partir de este momento las IPs serán:
 - **192.168.56.11** como **principal** 
 - **192.168.56.10** como **respaldo**
 - **192.168.56.15** como  balanceador **nginx**
@@ -41,6 +40,7 @@ explicados en este guión (por ejemplo Pound).*
 
 El primer paso es **instalar nginx y activar el servicio**:
 `sudo apt install nginx`
+
 `sudo systemctl enable nginx && sudo systemctl start nginx`
 
 Para comprobar que está escuchando y funcionando, se realiza el mismo procedimiento que con Apache. `ps aux | grep nginx` devolverá si el servicio está escuchando.
@@ -49,7 +49,7 @@ Para comprobar que está escuchando y funcionando, se realiza el mismo procedimi
 
 En el guión de prácticas se indica como realizar la configuración de nginx, pero tras la realización no funcionaba. Por lo tanto empleé el tutorial mostrado en [DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-set-up-nginx-load-balancing).
 
-**Nota:**Cada vez que se edite el archivo de configuración de nginx se debe reiniciar el servicio con  `sudo systemctl restart nginx`
+**Nota:** Cada vez que se edite el archivo de configuración de nginx se debe reiniciar el servicio con  `sudo systemctl restart nginx`
 
 El archivo a editar se encuentra en la ruta *sudo nano /etc/nginx/sites-available/default*. En mi caso he realizado algunas modificaciones en el archivo, no lo he borrado.
 Primero he añadido los servidores finales: 
@@ -63,6 +63,7 @@ upstream backend  {
 También se debe buscar la línea `try_files $uri $uri/ =404;` y sustituirla por `proxy_pass  http://backend;`
 
 Aquí se muestra el correcto funcionamiento del balanceador de carga empleando **round-robin** por defecto.
+
 ![nginx-round.png](./img/nginx-round.png)
 
 Con la anterior configuración, se accederá el mismo número de veces a una máquina que otra. Si imaginamos que la máquina 1 tiene el doble de capacidad, nos interesará que esta atienda el doble de peticiones. Aplicar esta configuración es muy sencillo ya que existe la directiva **weight** que permite indicar proporciones de tráfico.
@@ -74,6 +75,7 @@ upstream backend  {
 }
 ```
 En la siguiente imagen se muestra el correcto funcionamiento de la ponderación:
+
 ![nginx-pond.png](./img/nginx-pond.png)
 
 Cuando recibimos varias peticiones de la misma dirección IP puede resultar muy útil redirigirlas al mismo servidor web. Para ello se puede añadir la directiva `ip_hash;`. 
@@ -94,7 +96,7 @@ Para **instalar y activar** haproxy:
 
 En el guión de prácticas se indica como realizar la configuración de haproxy, pero tras la realización no funcionaba correctamente. Siguiendo distintos tutoriales, he conseguido que funcione de la forma esperada. 
 
-**Nota:**Cada vez que se edite el archivo de configuración de haproxy se debe reiniciar el servicio con  `sudo systemctl restart haproxy`
+**Nota:** Cada vez que se edite el archivo de configuración de haproxy se debe reiniciar el servicio con  `sudo systemctl restart haproxy`
 
 El archivo de configuración de haproxy se encuentra en */etc/haproxy/haproxy.cfg*. Se debe sustituir el contenido del archivo por lo siguiente:
 
@@ -135,7 +137,7 @@ En mi caso, también he editado **haproxy.service**(*/etc/systemd/system/multi-u
 
 Volvemos a cargar el servicio con `systemctl restart haproxy`. Si has modificado **haproxy.service**, antes debes ejecutar `systemctl reload-daemon`
 
-Haproxy funciona correctamente empleando el algoritmo de reparto de carga Round-Robin
+Haproxy funciona correctamente empleando el algoritmo de reparto de carga Round-Robin:
 
 ![](./img/haproxy-round.png)
 
@@ -151,8 +153,8 @@ A continuación queremos que, como sucedió anteriormente, la máquina 1 sea som
 ```
 
 En este caso, el peso viene representado por un valor entre 0 y 255. En la documentación oficial se encuentra este párrafo donde se explica como funciona:
-*weight <weight>
-  The "weight" parameter is used to adjust the server's weight relative to
+
+  *The "weight" parameter is used to adjust the server's weight relative to
   other servers. All servers will receive a load proportional to their weight
   relative to the sum of all weights, so the higher the weight, the higher the
   load. The default weight is 1, and the maximal value is 256. A value of 0
@@ -209,9 +211,10 @@ Service
         Priority 1
     End
 ```
-También debe establecerse el autoinicio de Pound con la configuración por defecto (es decir, el archivo que acabamos de modificar). Lo logramos con `sed -i -e "s/^startup=0/startup=1/" /etc/default/pound `. Finalmente, reiniciamos el servicio con `systemctl restart pound`
+También **debe establecerse el autoinicio de Pound** con la configuración por defecto (es decir, el archivo que acabamos de modificar). Lo logramos con `sed -i -e "s/^startup=0/startup=1/" /etc/default/pound `. Finalmente, reiniciamos el servicio con `systemctl restart pound`
 
 Como se observa a continuación, Pound se encuentra funcionando correctamente. Ambas máquinas reciben la misma carga de trabajo.
+
 ![pound-round](./img/pound-round.png)
 
 Como en los anteriores ejemplos, la máquina 1 tiene el doble de potencia que la 2.
