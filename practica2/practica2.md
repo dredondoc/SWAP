@@ -31,7 +31,7 @@ El método descrito no es el más recomendado, es preferible emplear rsync.
 
 El primer paso, previo a la copia, es establecer como dueño del directorio web al usuario sin privilegios (en mi caso 'ubuserver') en ambas máquinas: `sudo chown ubuserver:ubuserver –R /var/www`
 
-Para comprobar el funcionamiento de rsync borraré el contenido de un directorio de la máquina 2 y lo clonaré de la máquina 1. Para realizarlo se debe emplear el siguiente comando `rsync -avz -e ssh user@ip:/dir/destino/ /dir/original/` donde:
+Para comprobar el funcionamiento de rsync borraré el contenido de un directorio de la máquina 2 y lo clonaré de la máquina 1. Para realizarlo se debe emplear el siguiente comando `rsync -avz -e ssh user@ip:/dir/original/ /dir/destino/` donde:
 * **a**  modo archivos.
 * **v**  verbose, información extra.
 * **z**  comprime el archivo para su envío.
@@ -76,7 +76,7 @@ Gracias a crontab se pueden programar tareas para ser realizadas automáticament
 
 Antes de realizar las tareas, debemos identificar el servidor principal y el servidor secundario. En mi caso estableceré como **máquina principal la 172.16.164.129** y como **máquina secundaria la 172.16.164.130**. Por lo tanto, la tarea de backup debe ser ejecutada en la máquina secundaria.
 
-Esta tarea debe ser realizada cada 2 horas, por lo que debemos añadir a crontab :
+Esta tarea debe ser realizada cada 2 horas, por lo que debemos añadir a crontab (*/etc/crontab*) :
 `0 */2 * * * rsync -avz -e ssh 172.16.164.129:/var/www/ /var/www/`
 
 ![crontab](./img/crontab.png)
