@@ -19,9 +19,9 @@ versión de Linux, se llevará a cabo de una forma u otra).*
 práctica, se propone realizar la instalación de un certificado del proyecto Certbot en
 lugar de uno autofirmado. Es importante tener en cuenta que para obtener este tipo de
 certificado, es necesario disponer de un dominio real con IP pública (no se puede
-hacer en máquinas virtuales).
+hacer en máquinas virtuales).*
 
-Como segunda tarea opcional para conseguir una mayor nota en esta práctica, se
+*Como segunda tarea opcional para conseguir una mayor nota en esta práctica, se
 propone realizar la configuración del cortafuegos en una cuarta máquina (M4) que se
 situará delante del balanceador. Esa M4 sólo tendrá configuradas las iptables, para
 hacer el filtrado y posterior reencaminamiento del tráfico hacia el balanceador. En esta
