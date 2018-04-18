@@ -103,6 +103,113 @@ Activamos SSL como se indicaba anteriormente y comprobamos que funciona correcta
 
 ![](./img/prueba2.png)
 
+En ambos servidores queda configurado correctamente SSL.
+
+
+#### SSL en Nginx
+
+El siguiente paso es activar https en Nginx. Para ello debemos copiar el certificado SSL generado anteriormente al balanceador. 
+
+`rsync -avz -e ssh <user>@<ip_origen>:/etc/apache2/ssl/* /etc/ssl/`
+
+Editamos el archivo de configuración de Nginx: 
+
+`nano /etc/nginx/sites-available/default`
+
+Quedando como sigue:
+
+![](./img/nginx-ssl.png)
+
+Finalmente reiniciamos el servicio ( `service nginx restart`) y comprobamos que funciona correctamente.
+
+![](./img/curl-nginx.png)
+
+---
+## Configurar cortafuegos con IPTABLES
+
+A continuación se muestra como configurar el cortafuegos en una de las máquinas servidoras finales (en mi caso la máquina con IP 192.168.56.10).
+
+Para llevarlo a cabo, se definen reglas en iptables para bloquear el tráfico en general y a continuación permitir aquel que nosotros definamos. El script es similar al mostrado en el guión de prácticas, y además se mostrará el resultado tras ir aplicando estas reglas.
+
+```bash
+# (1) Eliminar todas las reglas (configuración limpia)
+iptables -F
+iptables -X
+iptables -Z
+iptables -t nat -F
+# (2) Política por defecto: denegar todo el tráfico
+iptables -P INPUT DROP
+iptables -P OUTPUT DROP
+iptables -P FORWARD DROP
+# (3) Permitir cualquier acceso desde localhost (interface lo)
+iptables -A INPUT -i lo -j ACCEPT
+iptables -A OUTPUT -o lo -j ACCEPT
+# (4) Abrir el puerto 22 para permitir el acceso por SSH
+iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+iptables -A OUTPUT -p tcp --sport 22 -j ACCEPT
+# (5) Abrir los puertos HTTP (80) de servidor web
+iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+iptables -A OUTPUT -p tcp --sport 80 -j ACCEPT
+# (6) Abrir los puertos HTTPS (443) de servidor web
+iptables -A INPUT -p tcp --dport 443 -j ACCEPT
+iptables -A OUTPUT -p tcp --sport 443 -j ACCEPT
+```
+
+El primer paso es bloquear todo el tráfico y permitirlo a través de localhost **(1), (2) y (3)**. Al intentar conectar por SSH o hacer una petición curl, se obtiene el siguiente resultado.  
+
+![](./img/iptables-1.png)
+
+Si aplicamos las reglas **(4) y (5)** logramos que SSH funcione y se podrá acceder por HTTP, pero no por HTTPS.
+
+![](./img/iptables-2.png)
+
+Aplicando la regla **(6)** conseguimos que se pueda acceder mediante HTTPS como se observa a continuación.
+
+![](./img/iptables-3.png)
+
+Ejecutando `netstat -tulpn` comprobamos que los puertos verdaderamente están escuchando.
+
+![](./img/netstat.png)
+
+Como se observa, iptables **queda correctamente configurado**. Por lo tanto, debemos ejecutar el script al inicio del sistema para aplicar las nuevas reglas descritas.
+
+Existen numerosas opciones para realizar la labor. En mi caso emplearé el archivo */etc/rc.local*. Basta con añadir la siguiente línea para que se ejecute en el inicio del sistema:
+
+`sh /path/to/script.sh`
+
+![](./img/rclocal.png)
+
+Finalmente, comprobamos si se aplican las reglas descritas. Para comprobarlo, el tráfico HTTPS será bloqueado en primera instancia, y a continuación, una vez comprobada la correcta aplicación al inicio del sistema, se permitirá.
+
+![](./img/comp-iptables.png)
+
+El cortafuegos en la máquina queda correctamente configurado.
+
+
+### Máquina 4 como cortafuegos
+
+Se ha creado una nueva máquina (con IP 192.168.56.20) que actuará como cortafuegos, redirigiendo al balanceador únicamente los paquetes dirigidos a los puertos 80 (HTTP) y 443 (HTTPS). Se deben establecer las siguientes reglas:
+
+```bash
+# (1) Eliminar todas las reglas (configuración limpia)
+iptables -F
+iptables -X
+iptables -Z
+iptables -t nat -F
+
+#(2) Redireccionar HTTP y HTTPS
+iptables -t nat -A PREROUTING -p tcp --dport 80 -j DNAT --to <ip_balanceador>
+iptables -t nat -A PREROUTING -p tcp --dport 443 -j DNAT --to <ip_balanceador>
+iptables -A FORWARD -d <ip_balanceador> -p tcp --dport 80 -j ACCEPT
+iptables -A FORWARD -d <ip_balanceador> -p tcp --dport 443 -j ACCEPT
+
+#(3) Permitir IP forwarding
+sysctl net.ipv4.ip_forward=1
+```
+
+Tras la ejecución del script, las peticiones HTTP y HTTPS al cortafuegos son redirigidas al balanceador correctamente:
+
+![](./img/firewall-bien.png)
 
 
 ----
