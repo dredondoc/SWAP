@@ -213,6 +213,32 @@ Tras la ejecución del script, las peticiones HTTP y HTTPS al cortafuegos son re
 
 ![](./img/firewall-bien.png)
 
+## Certbot
+
+El siguiente extracto procede de una práctica de TDRC (también realizada por mí) sobre la instalación de un servidor XMPP  que emplea comunicación segura con SSL/TSL.
+
+Para la gestión de certificados se usará Certbot (https://certbot.eff.org). Se trata de una herramienta desarrollada por la EFF (Electronic Frontier Foundation) para gestionar de forma automatica certificados TLS/SSL generados por Let’s Encrypt. 
+
+El primer paso es instalar el cliente como se indica en la página web, dependiendo del sistema empleado. 
+
+Una vez instalado, debe generarse un nuevo certificado para cada uno de los dominios a utilizar. En nuestro caso son galerarivera.duckdns.org y sanchezmolina.duckdns.org.
+
+Antes de generar los certificados, el router debe redirigir el tráfico en el puerto 80 (HTTP) al servidor. Hay que asegurarse de que el puerto se encuentra abierto.
+
+Para hacerlo, ejecutar como root:
+
+`certbot certonly --standalone`
+
+![](./img/certbot.png)
+
+Los certificados generados quedan en la carpeta **/etc/letsencrypt/live/dominio_registrado/**
+
+Finalmente, hay que editar el archivo de configuración del servidor y establecer las rutas del certificado y clave:
+
+```
+certificate = "/etc/letsencrypt/live/dominio_registrado/fullchain.pem";
+key = "/etc/letsencrypt/live/dominio_registrado/privkey.pem";
+```
 
 ----
 [Práctica 5](../practica5/practica5.md)
