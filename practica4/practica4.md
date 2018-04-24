@@ -204,6 +204,7 @@ iptables -t nat -A PREROUTING -p tcp --dport 80 -j DNAT --to <ip_balanceador>
 iptables -t nat -A PREROUTING -p tcp --dport 443 -j DNAT --to <ip_balanceador>
 iptables -A FORWARD -d <ip_balanceador> -p tcp --dport 80 -j ACCEPT
 iptables -A FORWARD -d <ip_balanceador> -p tcp --dport 443 -j ACCEPT
+iptables -t nat -A POSTROUTING -j MASQUERADE
 
 #(3) Permitir IP forwarding
 sysctl net.ipv4.ip_forward=1
