@@ -1,0 +1,134 @@
+﻿MICROSOFT AZURE
+Pablo Molina Gómez
+Germán Castro Montes
+¿Qué es?
+Es un servicio en la nube alojado en los Data Centers de Microsoft. Pasó a ser un producto comercial el 1 de enero de 2010. Windows Azure es una plataforma general que tiene diferentes servicios para aplicaciones, desde servicios que alojan aplicaciones en alguno de los centros de procesamiento de datos de Microsoft para que se ejecute sobre su infraestructura (Cloud Computing) hasta servicios de comunicación segura y federación entre aplicaciones.
+Herramientas y servicios
+La visión de la nube de Microsoft Azure parece estar orientada al mundo empresarial, tanto aquellas corporaciones de mayor tamaño como a las pequeñas y medianas empresas. Por ello, la mayoría de servicios son escalables y son capaces de responder a necesidades generales del mismo modo que a necesidades más particulares. Azure tiene un amplio abanico de herramientas y servicios que puede ofrecer a los usuarios y que pueden resumirse en las siguientes categorías: 
+-Servicios para móviles: creación, desarrollo y gestión de aplicaciones para distintos sistemas operativos móviles, con diferentes lenguajes de programación disponibles. 
+-Almacenamiento: diferentes tipos de almacenamiento (SQL, BLOBs, tablas, etc.) para diferentes formatos de archivos o estructuras de almacenaje. También como almacenamiento de los datos de aplicaciones y programas empresariales. 
+-Herramientas de seguridad: protocolos, herramientas y opciones complementarias para aumentar la seguridad de sus datos y aplicaciones locales o en la nube. Creación de sistemas de autentificación en varios pasos, recuperación ante desastres mediante copias de seguridad, etc. 
+-Flujos de trabajo: procesos de automatización y optimización de flujos de trabajo, tareas y procesos internos de la empresa. Tareas automatizadas a través de Azure y servicios complementarios. -Máquinas virtuales: creación, administración y gestión de máquinas virtuales, con gran cantidad de imágenes a elegir en Azure Marketplace. 
+-Business Intelligence: recolección y gestión de grandes cantidades de datos para análisis e informes internos. Herramientas de análisis y previsión empresarial. 
+-Servicios multimedia y retransmisión: envío y recepción de audio y vídeo, retransmisión a gran escala tanto en directo como con programación pregrabada. 
+-Redes híbridas y redes privadas: gestión y creación de redes híbridas y privadas, conexión de aplicaciones empresariales entre distintas redes, ampliación o modificación de la infraestructura interna de la empresa.
+¿Cómo funciona?
+En el portal Microsoft Azure existen diferentes servicios de infraestructura y de plataforma para que puedas “montar” los servicios que necesites de manera sencilla, con unos cuántos clics. En tu portal dispones de un botón [New +] y a partir de ahí, sólo tienes que elegir la región de los datacenter donde estará tu servicio y, a continuación, el tipo de servicio con sus características. Por ejemplo, en el caso de querer crear una máquina virtual podrías seleccionar el tipo de máquina como Windows Server 2016 Datacenter, a continuación, rellenar todos sus características (espacio de disco, RAM…). En este proceso de creación, se define un nombre de usuario y contraseña específica para poder iniciar sesión en esta máquina virtual. 
+Entre los servicios, dispones de infraestructuras (IaaS: almacenamiento, redes, máquinas virtuales…) y plataformas (PaaS: bases de datos de alta disponibilidad SQL, CMS para desarrollo de web, backend para aplicaciones móviles…). Son compatibles con todo tipo de tecnología: bases de datos Oracle, Linux, php, iOs, My SQL, Android, php… 
+Estos servicios están garantizados con una disponibilidad del 99.99%, y en caso de fallo en disponibilidad superior, Microsoft se compromete a indemnizar por los daños. Además, cuenta con todas las certificaciones en materia seguridad y protección de datos. Es la primera plataforma cloud que cumple en categoría alta las características de la certificación de conformidad del Esquema Nacional de Seguridad.
+Implementación
+Windows Azure utiliza un sistema operativo especializado, llamado de la misma forma, para correr sus "capas" (en inglés “fabric layer”) — un cluster localizado en los servidores de datos de Microsoft que se encargan de manejar los recursos almacenados y procesamiento para proveer los recursos(o una parte de ellos) para las aplicaciones que se ejecutan sobre Windows Azure. 
+Windows Azure se describe como una “capa en la nube” (en inglés "cloud layer") funcionando sobre un número de sistemas que utilizan Windows Server, estos funcionan bajo la versión 2008 de Windows Server y una versión personalizada de Hyper-V, conocido como el Hipervisor de Windows Azure que provee la virtualización de los servicios. La capa controladora de Windows Azure se encarga de escalar y de manejar la confiabilidad del sistema evitando así que los servicios se detengan si alguno de los servidores de datos de Microsoft tiene problemas y a su vez maneja la información de la aplicación web del usuario dando como ejemplo los recursos de la memoria o el balanceo del uso de esta.
+Copias de seguridad
+Dado que la tecnología puede fallar, Windows ofrece una manera de proteger la información importante con una copia de seguridad automática dentro de un servicio de almacenamiento. Las copias de seguridad quedan cifradas antes de la transmisión y se almacenan cifradas en Windows Azure. Estas copias de seguridad están fuera de sitio, lejos de su centro de datos, lo que reduce la necesidad de asegurar y proteger los medios de copia de seguridad en el lugar. 
+La administración de copias de seguridad en la nube usa herramientas de copia de seguridad conocidas en Windows Server, Windows Server Essentials, o el Administrador de System Center Data Protection. Estas herramientas proporcionan experiencias similares al configurar, supervisar y recuperar copias de seguridad ya sea en el disco local o el almacenamiento de Windows Azure, o puede utilizar el software propio del agente. Después de que los datos se copian a la nube, los usuarios autorizados pueden recuperar fácilmente copias de seguridad de cualquier servidor. También se pueden utilizar Copias de seguridad incremental para asegurar el uso eficiente de almacenamiento y un menor consumo de ancho de banda, al mismo tiempo que permite la recuperación de punto en el tiempo de varias versiones de los datos.
+Ventajas
+Destacamos la flexibilidad y el pago por uso. Con Azure ya no es necesaria la inversión en máquinas físicas y el mantenimiento que conllevan. De esta manera, se simplifica el despliegue ya que no hay que comprometerse con largos periodos de amortización, se agiliza el proceso de configuración y nos permite adaptar nuestros sistemas a nuestras necesidades en pocos minutos, con total flexibilidad. Además, dispone de herramientas para poder monitorizar el rendimiento y así predecir si es necesario escalar o no nuestras máquinas, y en consecuencia, pagar por lo que realmente necesitas. Por este motivo, distinguimos tres situaciones en las que, sin duda, se recomienda utilizar los servicios de Azure: 
+-En el despliegue de una solución en la que el incremento de uso va a ser exponencial (o desconocido) y no podemos definir con garantías el pico de demanda máximo. 
+-Cuando sabes que la demanda del servicio va a fluctuar en el tiempo. 
+-En entornos de desarrollo o pruebas que posteriormente podrían seguirse utilizando o no, o que pueden “apagarse” puntualmente y después volverse a activar.
+
+Otra de las ventajas de Azure es su amplia comunidad.
+
+
+
+
+
+
+
+
+Desplegando una aplicación
+Azure cuenta con una tienda donde ofrece numerosas opciones para implementar nuestro sitio. Esta se organiza por categorías para mayor facilidad hacia el usuario. Una vez elegido el servicio deseado, basta con definir algunos parámetros (como son el nombre del servicio o contraseña de la base de datos) para poder comenzar a usarlo. 
+
+
+
+
+Una vez se ha creado y puesto en marcha, se accede para comprobar el correcto funcionamiento del sitio. En este caso, se ha elegido Wordpress.
+
+
+
+Escalado horizontal
+
+Azure ofrece escalado horizontal que puede ser implementado de forma rápida, económica y sencilla. Usando escalado horizontal se puede ahorrar una gran cantidad de dinero. Esto ocurre ya que Azure no cobra por el servicio en concreto, sino por el uso de este. Si a nuestro servicio apenas cuenta con usuarios, una sola instancia valdrá para atenderlos. Pero en caso de que la demanda aumente, los nuevos usuarios deben ser atendidos, sin que el servicio deje de estar operativo. Para ello, basta con añadir nuevas instancias conforme el número de usuarios crezca, y reducirlas si baja el número de usuarios. 
+
+Escalado según métricas
+
+Se ofrecen distintas métricas a la hora de añadir o retirar instancias del servicio. Aunque se pueden añadir tantas reglas como se quieran, el mínimo recomendado son al menos una de incremento de instancias y otra de decremento. 
+
+Al añadir nuevas reglas, se ofrecen los siguientes criterios:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+· Duración: Por ejemplo, 10 minutos significa que, cada vez que se ejecuta el escalado automático, este consulta las métricas de los últimos 10 minutos. De este modo, las métricas pueden estabilizarse y se evita que reaccionen a picos transitorios.
+
+Las acciones disponibles son las que permiten reducir o ampliar el número de máquinas. Se puede escalar en una unidad, escalar hasta alcanzar un número de instancias concreto o escalar según un porcentaje. 
+
+El tiempo de finalización indica la cantidad de tiempo que debe transcurrir después de realizar una operación de escalado antes de iniciar otra
+
+
+
+
+Finalmente, la regla queda correctamente declarada. También se añade una regla para reducir el número de instancias. Se pueden observar a continuación.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Tras establecer las reglas, el escalado horizontal queda correctamente configurado.
+
+
+Escalado según una programación
+Además de escalar en función de una métrica, también se puede escalar de forma diferente para días específicos de la semana.
+
+
+
+Escalado según una fecha
+Además de escalar en función de una métrica, también se puede escalar de forma diferente para fechas específicas.
+
+
+Pruebas de Carga
+Azure ofrece un sistema de prueba de recursos. Es decir, permite cargar el sistema con el fin de comprobar el rendimiento de este. En nuestro caso, queremos ver si el servidor escala correctamente, tanto el la ampliación como en la reducción. 
+Se trata de un sistema muy simple, donde hay que indicar la carga de usuarios y la duración de la prueba. 
+
+
+
+
+
+
+
+
+
+
+
+
+Una vez completada la prueba de carga se puede observar el incremento (y posterior decremento) de  las instancias empleadas. En nuestro caso se ha pasado de 1 instancia por defecto a emplear 4.
+
+Como se observa en el gráfico, el número de instancias crece al aumentar la carga del sistema. Cuando esta carga se reduce, también lo hacen las instancias, pero no directamente, sino que pasan unos minutos entre reducción y reducción.
+
+El historial muestra como se ha escalado 3 veces y el tiempo entre ellos.
+
+
