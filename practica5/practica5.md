@@ -124,7 +124,7 @@ Finalmente debe crearse un nuevo usuario que actuará como esclavo y anotar el a
 
 La máquina que actuará como Master tiene la **IP 192.168.56.51**
 
-**En el caso de estar trabajando con virtualbox y haber clonado la máquina esclavo a partir de la maestro, el archivo */var/lib/mysql/auto.cnf* debe eliminarse para evitar errores con el UUID **
+**En el caso de estar trabajando con virtualbox y haber clonado la máquina esclavo a partir de la maestro, el archivo */var/lib/mysql/auto.cnf* debe eliminarse para evitar errores con el UUID**
 
 El primer paso es editar el archivo de configuración */etc/mysql/mysql.conf.d/mysqld.cnf* cambiando o descomentando las siguientes líneas
 
